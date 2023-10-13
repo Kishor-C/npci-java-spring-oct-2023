@@ -1,6 +1,7 @@
 package com.npci.service;
 
 import com.npci.User;
+import com.npci.exceptions.UserNotFoundException;
 
 // service layer class
 public class UserService {
@@ -29,14 +30,14 @@ public class UserService {
 	 * Create a method that finds the user by name and returns the User 
 	 * In Main method create case 3 to accept the name & find the user by name
 	 */
-	public User findUserByName(String name) {
+	public User findUserByName(String name) throws UserNotFoundException {
 		User[] array = findAll();
 		for(User u : array) {
-			if(u.getName().equals(name)) {
+			if(u.getName().equalsIgnoreCase(name)) {
 				return u;
 			}
 		}
 		// throw exception or return null
-		return null;
+		throw new UserNotFoundException("Sorry "+name+" not found");
 	}
 }

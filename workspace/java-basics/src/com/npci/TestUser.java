@@ -3,6 +3,7 @@ package com.npci;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.npci.exceptions.UserNotFoundException;
 import com.npci.service.UserService;
 
 public class TestUser {
@@ -43,8 +44,14 @@ public class TestUser {
 				System.out.println("Enter name");
 				// name is already declared in the case 1
 				name = scan.next();
-				user = service.findUserByName(name);
-				System.out.println("Hello "+user.getName()+" your birthday = "+user.getBirthday());
+				try {
+					user = service.findUserByName(name);
+					System.out.println("Hello "+user.getName()+" your birthday = "+user.getBirthday());
+				} catch (UserNotFoundException e) {
+					// View / Controller will get a different response code for exception 
+					System.err.println(e.getMessage());
+				}
+				
 				break;
 			}
 		} while(option != -1);
