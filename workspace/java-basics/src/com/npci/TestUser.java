@@ -4,17 +4,20 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.npci.exceptions.UserNotFoundException;
+import com.npci.service.UserOperations;
 import com.npci.service.UserService;
+import com.npci.utility.UserOperationsFactory;
 
 public class TestUser {
 	
-	public static void main(String[] args) {
+	private static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		UserService service = new UserService(); // to call store() & findAll() 
+		UserOperations service = UserOperationsFactory.getInstance(); // to call store() & findAll() 
 		int option = 0; // user option to store or findAll or exit
 		do {
 			System.out.println("1: Store 2: Find All 3: Find By Name -1: Exit");
 			option = scan.nextInt();
+			
 			switch(option) {
 			case 1: 
 				// ask for name, dob, phone & initialize the user object and pass to the service.store()
