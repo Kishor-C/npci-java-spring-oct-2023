@@ -3,7 +3,7 @@ package com.npci;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 	private int id;
 	private String name;
 	private double salary;
@@ -63,6 +63,10 @@ public class Employee {
 	}
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
+	}
+	@Override
+	public int compareTo(Employee o) {
+		return id - o.getId();
 	}
 	
 	
