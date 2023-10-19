@@ -42,6 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = dao.findById(id);
 		if(employee != null)
 			return employee;
+		// if employee is null throw exception
 		throw new EmployeeNotFoundException("Id "+id+" not found");
 	}
 
@@ -66,7 +67,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = findEmployee(id);
 		dao.delete(employee.getId());
 	}
-
-	
 
 }
