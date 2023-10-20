@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.npci.beans.Employee;
 import com.npci.dao.EmployeeDao;
+import com.npci.exceptions.EmployeeNotFoundException;
 import com.npci.service.EmployeeService;
 
 public class TestControllerFromMain {
@@ -24,5 +25,13 @@ public class TestControllerFromMain {
 				new Employee(0, "Y", 4000));
 		System.out.println(ids);
 		// call other methods 
+		try {
+			Employee e = service.findEmployee(2);
+			System.out.println(e);
+		} catch (EmployeeNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

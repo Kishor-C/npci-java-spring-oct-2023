@@ -2,7 +2,9 @@ package com.npci.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.npci.beans.Employee;
@@ -15,14 +17,13 @@ import com.npci.beans.Employee;
  * <bean id = "dao" class = "com.npci.dao.EmployeeDaoORMImpl> 
  * 	<property name = "template" ref = "hibernateTemplateBean" />
  */
+@Repository // id = employeeDaoORMImpl
 public class EmployeeDaoORMImpl implements EmployeeDao {
 
+	@Autowired
 	private HibernateTemplate template; // generate setter
 
-	public void setTemplate(HibernateTemplate template) {
-		this.template = template;
-	}
-
+	
 	@Override
 	
 	public Employee save(Employee employee) {

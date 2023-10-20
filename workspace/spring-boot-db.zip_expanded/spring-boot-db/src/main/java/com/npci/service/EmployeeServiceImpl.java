@@ -1,8 +1,9 @@
 package com.npci.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,34 +18,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	private EmployeeDao dao; // setter method to supply the object
-
-	
+	// in old EmployeeDao we had created our own methods which won't work
 	@Override
-	@Transactional
+	
 	public List<Integer> createEmployees(Employee employee1, Employee... employees) {
-		List<Integer> idList = new ArrayList<>();
-		Employee e = dao.save(employee1);
-		idList.add(e.getId());
-		for(Employee emp : employees) {
-			Employee e2 = dao.save(emp);
-			idList.add(e2.getId());
-		}
-		return idList;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public Employee createEmployee(Employee employee) {
+		// save() method of JpaRepository
 		return dao.save(employee);
 	}
 
 	@Override
 	public Employee findEmployee(int id) throws EmployeeNotFoundException {
-		Employee employee = dao.findById(id);
-		if(employee != null)
-			return employee;
-		// if employee is null throw exception
-		throw new EmployeeNotFoundException("Id "+id+" not found");
+		// findById() method of JpaRepository
+		// import java.util.Optional
+		Optional<Employee> op = dao.findById(id);
+		// below code either returns employee or throws EmployeeNotFoundException
+		return op.orElseThrow(() -> new EmployeeNotFoundException("id "+id+" not found"));
 	}
 
 	@Override
@@ -54,19 +49,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> findEmployeesByName(String name) {
-		List<Employee> employees = findEmployees();
-		// all employees are filtered by name and collected to a new list
-		List<Employee> names = employees.stream()
-				.filter(item -> item.getName().equals(name))
-				.collect(Collectors.toList());
-		return names;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	@Transactional
 	public void deleteEmployee(int id) throws EmployeeNotFoundException {
-		Employee employee = findEmployee(id);
-		dao.delete(employee.getId());
+		// TODO Auto-generated method stub
+		
 	}
 
+	
+	
 }

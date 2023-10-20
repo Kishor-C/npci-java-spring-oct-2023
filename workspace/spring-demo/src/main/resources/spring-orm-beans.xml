@@ -65,13 +65,6 @@
      	<property name = "sessionFactory" ref = "sf"></property>
      </bean>
      
-	<bean id = "dao" class = "com.npci.dao.EmployeeDaoORMImpl">
-		<property name = "template" ref = "hibernateTemplateBean" />
-	</bean>
-	
-	<bean id = "service" class = "com.npci.service.EmployeeServiceImpl">
-		<property name="dao" ref = "dao"></property>
-	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">  
         <property name="sessionFactory" ref="sf"></property>  
