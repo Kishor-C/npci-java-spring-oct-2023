@@ -28,6 +28,12 @@ public class EmployeeController {
 	// a string of exceptions
 	private List<String> exceptionsList = new ArrayList<>();
 	
+	@GetMapping(path = "/employees/searchByName/{name}")
+	public ResponseEntity<Object> getEmployees(@PathVariable("name") String name) {
+		List<Employee> employees = service.findEmployeesByName(name);
+		return ResponseEntity.status(200).body(employees);
+	}
+	
 	@GetMapping(path = "/employees")
 	public ResponseEntity<Object> getAllEmployees() {
 		List<Employee> employees = service.findEmployees();
@@ -38,7 +44,7 @@ public class EmployeeController {
 	// create a webservice to get the employee based on id
 	// /api/employees/5
 	@GetMapping(path = "/employees/{id}")
-	public ResponseEntity<Object> getAllEmployees(@PathVariable("id") int id) {
+	public ResponseEntity<Object> getEmployees(@PathVariable("id") int id) {
 		try {
 			Employee employee = service.findEmployee(id);
 			return ResponseEntity.status(200).body(employee);
